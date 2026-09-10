@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WG PRIME X — JEE Command Center</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= TOP NAV ================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-mark">WG</div>
+
+        <div>
+            <h1>WG PRIME X</h1>
+            <p>JEE COMMAND CENTER</p>
+        </div>
+    </div>
+
+    <div class="top-right">
+
+        <div class="online">
+            <span></span>
+            SYSTEM ONLINE
+        </div>
+
+        <div id="clock">00:00:00</div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                JEE PREPARATION SYSTEM
+            </div>
+
+            <h2>
+                BUILD YOUR
+                <span>RANK.</span>
+            </h2>
+
+            <p>
+                One dashboard for your syllabus, daily targets,
+                focus sessions and mock-test performance.
+            </p>
+
+        </div>
+
+        <div class="hero-logo">
+
+            <strong>WG</strong>
+
+            <span>PRIME X</span>
+
+            <small>JEE 2026</small>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STAT CARDS ================= -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <span>SYLLABUS</span>
+            <strong id="overallProgress">0%</strong>
+            <small>Overall completion</small>
+        </div>
+
+        <div class="stat">
+            <span>TODAY</span>
+            <strong id="todayProgress">0%</strong>
+            <small>Daily mission</small>
+        </div>
+
+        <div class="stat">
+            <span>MOCK TESTS</span>
+            <strong id="mockCount">0</strong>
+            <small>Tests completed</small>
+        </div>
+
+        <div class="stat">
+            <span>STREAK</span>
+            <strong id="streak">0 🔥</strong>
+            <small>Days active</small>
+        </div>
+
+    </section>
+
+
+    <!-- ================= DASHBOARD GRID ================= -->
+
+    <section class="dashboard">
+
+        <!-- DAILY MISSION -->
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <label>TODAY</label>
+                    <h3>Daily Mission</h3>
+                </div>
+
+                <span id="todayDate"></span>
+
+            </div>
+
+
+            <div class="daily-progress">
+
+                <div>
+                    <span>Today's completion</span>
+                    <strong id="dailyPercent">0%</strong>
+                </div>
+
+                <div class="progress-bar">
+                    <i id="dailyBar"></i>
+                </div>
+
+            </div>
+
+
+            <div class="tasks">
+
+                <label class="task">
+
+                    <input type="checkbox" data-hours="2">
+
+                    <span class="box"></span>
+
+                    <div>
+                        <strong>Physics</strong>
+                        <small>Concept revision + problems</small>
+                    </div>
+
+                    <b>2H</b>
+
+                </label>
+
+
+                <label class="task">
+
+                    <input type="checkbox" data-hours="2">
+
+                    <span class="box"></span>
+
+                    <div>
+                        <strong>Chemistry</strong>
+                        <small>NCERT + PYQ practice</small>
+                    </div>
+
+                    <b>2H</b>
+
+                </label>
+
+
+                <label class="task">
+
+                    <input type="checkbox" data-hours="2">
+
+                    <span class="box"></span>
+
+                    <div>
+                        <strong>Mathematics</strong>
+                        <small>Problem solving</small>
+                    </div>
+
+                    <b>2H</b>
+
+                </label>
+
+
+                <label class="task">
+
+                    <input type="checkbox" data-hours="2">
+
+                    <span class="box"></span>
+
+                    <div>
+                        <strong>PYQ Session</strong>
+                        <small>JEE Main / Advanced PYQs</small>
+                    </div>
+
+                    <b>2H</b>
+
+                </label>
+
+            </div>
+
+
+            <button class="outline-btn" onclick="resetDailyTasks()">
+                RESET DAILY MISSION
+            </button>
+
+        </div>
+
+
+        <!-- FOCUS TIMER -->
+
+        <div class="panel focus-panel">
+
+            <label>FOCUS MODE</label>
+
+            <h3>Deep Work Timer</h3>
+
+            <div class="timer" id="timer">
+                25:00
+            </div>
+
+            <div class="timer-controls">
+
+                <button onclick="startTimer()">START</button>
+
+                <button onclick="pauseTimer()">PAUSE</button>
+
+                <button onclick="resetTimer()">RESET</button>
+
+            </div>
+
+            <p class="hint">
+                Spacebar = Start / Pause
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SYLLABUS ================= -->
+
+    <section class="section">
+
+        <div class="section-top">
+
+            <div>
+                <label>CORE SYLLABUS</label>
+
+                <h3>JEE Chapter Tracker</h3>
+
+                <p>
+                    Track every important chapter and build your completion percentage.
+                </p>
+            </div>
+
+
+            <div class="overall-circle">
+
+                <strong id="syllabusPercent">0%</strong>
+
+                <span>COMPLETE</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SEARCH / FILTER -->
+
+        <div class="syllabus-controls">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search chapter..."
+            >
+
+            <select id="subjectFilter">
+
+                <option value="all">All Subjects</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Mathematics">Mathematics</option>
+
+            </select>
+
+            <select id="statusFilter">
+
+                <option value="all">All Chapters</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- SUBJECT TABS -->
+
+        <div class="subject-tabs">
+
+            <button
+                class="subject-tab active"
+                data-subject="all">
+                ALL
+            </button>
+
+            <button
+                class="subject-tab"
+                data-subject="Physics">
+                PHYSICS
+            </button>
+
+            <button
+                class="subject-tab"
+                data-subject="Chemistry">
+                CHEMISTRY
+            </button>
+
+            <button
+                class="subject-tab"
+                data-subject="Mathematics">
+                MATHEMATICS
+            </button>
+
+        </div>
+
+
+        <!-- SUBJECT PROGRESS -->
+
+        <div class="subject-progress">
+
+            <div>
+                <span>Physics</span>
+                <strong id="physicsPercent">0%</strong>
+
+                <div class="mini-bar">
+                    <i id="physicsBar"></i>
+                </div>
+            </div>
+
+
+            <div>
+                <span>Chemistry</span>
+                <strong id="chemistryPercent">0%</strong>
+
+                <div class="mini-bar">
+                    <i id="chemistryBar"></i>
+                </div>
+            </div>
+
+
+            <div>
+                <span>Mathematics</span>
+                <strong id="mathPercent">0%</strong>
+
+                <div class="mini-bar">
+                    <i id="mathBar"></i>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- CHAPTER LIST -->
+
+        <div id="syllabusList" class="syllabus-list"></div>
+
+    </section>
+
+
+    <!-- ================= MOCK TESTS ================= -->
+
+    <section class="section">
+
+        <div class="section-top">
+
+            <div>
+                <label>PERFORMANCE</label>
+                <h3>Mock Test Tracker</h3>
+                <p>Record your test performance.</p>
+            </div>
+
+            <button class="primary-btn" onclick="addMockTest()">
+                + ADD MOCK TEST
+            </button>
+
+        </div>
+
+
+        <div class="mock-form">
+
+            <input
+                id="mockName"
+                placeholder="Test name"
+            >
+
+            <input
+                id="mockScore"
+                type="number"
+                placeholder="Score"
+            >
+
+            <input
+                id="mockMarks"
+                type="number"
+                placeholder="Total marks"
+            >
+
+            <button onclick="addMockTest()">
+                ADD
+            </button>
+
+        </div>
+
+
+        <div id="mockList" class="mock-list"></div>
+
+    </section>
+
+
+    <!-- ================= QUICK ACTIONS ================= -->
+
+    <section class="quick">
+
+        <div>
+            <label>CONTROL CENTER</label>
+            <h3>Quick Actions</h3>
+        </div>
+
+
+        <div class="quick-grid">
+
+            <button onclick="motivation()">
+                ⚡ MOTIVATION
+            </button>
+
+            <button onclick="scrollToSyllabus()">
+                📚 SYLLABUS
+            </button>
+
+            <button onclick="resetEverything()">
+                ↻ RESET DATA
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= NOTES ================= -->
+
+    <section class="section">
+
+        <div class="section-top">
+
+            <div>
+                <label>PERSONAL SPACE</label>
+                <h3>Study Notes</h3>
+                <p>Your notes are automatically saved.</p>
+            </div>
+
+        </div>
+
+
+        <textarea
+            id="notes"
+            placeholder="Write your study plan, weak topics, targets, formulas..."
+        ></textarea>
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <strong>WG PRIME X</strong>
+
+    <span>JEE COMMAND CENTER</span>
+
+    <small>
+        DISCIPLINE • CONSISTENCY • RANK
+    </small>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
